@@ -1,0 +1,11 @@
+ .sort {
+    display: flex;
+    align-self: flex-end;
+}
+
+@media (max-width: 480px) {
+    .sort {
+        align-self: flex-start;
+    }
+} 
+
