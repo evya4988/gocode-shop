@@ -49,7 +49,7 @@ const Routing = () => {
     useEffect(() => {
         const getApiAnswer = async () => {
             try {
-                const productsUrl = 'https://store-app-6aak.onrender.com:7000/api/products';
+                const productsUrl = 'https://store-app-6aak.onrender.com/api/products';
                 const response = await axios.get(productsUrl);
                 console.log(response)
                 const data = await response.data;
