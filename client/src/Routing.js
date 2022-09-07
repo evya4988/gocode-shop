@@ -84,6 +84,7 @@ const Routing = () => {
 
     const addCartItem = (product) => {
         const productInCart = cart.findIndex((item) => item._id === product._id);
+        console.log("productInCart" + productInCart);
         if (productInCart === -1) {
             const newCartItems = { ...product, amount: 1 };
             setCart((prev) => [newCartItems, ...prev]);
