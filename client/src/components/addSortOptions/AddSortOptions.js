@@ -1,13 +1,13 @@
 import React from 'react'
 import './AddSortOptions.css'
 import AddFilter from '../addFilter/AddFilter';
-import AddSort from '../addSort/AddSort'
+import AddSlider from '../addSlider/AddSlider'
 
 const AddSortOptions = (props) => {
     return (
         <div className='sort'>
             <AddFilter products={props.products}/>
-            <AddSort products={props.products}/>
+            <AddSlider products={props.products}/>
         </div>
     );
 }

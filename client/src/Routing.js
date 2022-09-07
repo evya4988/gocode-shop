@@ -20,6 +20,7 @@ import './StyledLink.css';
 import axios from 'axios';
 
 
+
 const Routing = () => {
 
     const [productsData, setProductsData] = useState([]);
@@ -65,6 +66,8 @@ const Routing = () => {
     // useEffect(() => {
     //   console.log(productsData)
     // }, [productsData])
+
+    
 
     const categories = productsData
         .map(p => p.category)
