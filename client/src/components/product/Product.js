@@ -1,4 +1,5 @@
 import './Product.css'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Product = ({ id, category, price, title, image, addCartItem, removeCartItem, description, cart }) => {
@@ -7,6 +8,11 @@ const Product = ({ id, category, price, title, image, addCartItem, removeCartIte
     let amount = 0;
 
     const first4TitleWords = title.split(' ').slice(0, 4).join(' ');
+
+    useEffect(() => {
+        console.log(id);
+    }, [])
+
     return (
 
         <div className="product-card">

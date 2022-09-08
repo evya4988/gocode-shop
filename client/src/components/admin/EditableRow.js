@@ -2,8 +2,7 @@ import React from 'react'
 
 const EditableRow = ({ editFormData, handleEditFormChange, handleCancelClick }) => {
   return (
-    <div className="table-container">
-      <tr>
+      <tr >
         <td>
           <input
             type="text"
@@ -58,8 +57,7 @@ const EditableRow = ({ editFormData, handleEditFormChange, handleCancelClick }) 
           <button type="submit">Save</button>
           <button type="submit" onClick={handleCancelClick}>Cancel</button>
         </td>
-      </tr>
-    </div>
+    </tr>
   )
 }
 

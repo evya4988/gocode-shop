@@ -15,7 +15,7 @@ const Cart = ({ removeCartItem, amountCardHandler }) => {
   }, [cart]);
 
   const allCartProducts = cart.map((item) =>
-    <div className="c-card" key={item.id} >
+    <div className="c-card" key={item._id} >
       <div className="c-image">
         <img src={item.image} alt="Item" />
       </div>

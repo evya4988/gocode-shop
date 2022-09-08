@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './Products.css'
 import Product from '../product/Product'
 import './Loading.css'
@@ -9,14 +9,14 @@ const Products = ({ addCartItem, removeCartItem, loading, cart }) => {
     const { productsData, filteredProducts } = useContext(MyContext);
     const currentList = filteredProducts.length > 0 ? filteredProducts : productsData;
 
+    
+
     const productListDisplay = currentList.map((product, index) => (
-        // <Link to={`/product/${product.id}`}>
             <Product
                 key={index}
-                id={product.id}
+                id={product._id}
                 title={product.title}
                 price={product.price}
-                // <a href={`/products/${props.id}`} >{product.image}<img /></a >
                 image={product.image}
                 description={product.description}
                 category={product.category}
@@ -24,7 +24,6 @@ const Products = ({ addCartItem, removeCartItem, loading, cart }) => {
                 removeCartItem={() => removeCartItem(product)}
                 cart={cart}
             />
-        //   </Link> 
     ))
 
     if (!productsData && !filteredProducts) {

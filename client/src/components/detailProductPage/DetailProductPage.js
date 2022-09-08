@@ -10,10 +10,10 @@ const DetailProductPage = ({ addCartItem }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const itemPage = productsData.find((product) => product.id == id);
+    const itemPage = productsData.find((product) => product._id == id);
     setSingleItem(itemPage);
 
-    console.log(itemPage?.id);
+    console.log(itemPage?._id);
   }, [productsData])
 
   // const first4TitleWords = singleItem.title.split(' ').slice(0, 5).join(' ');
@@ -34,7 +34,7 @@ const DetailProductPage = ({ addCartItem }) => {
           <div style={{ display: 'flex', height: '3em', }}>
             <button
               style={{ width: '100(%', border: '1px solid gray' }}
-              onClick={addCartItem}
+              onClick={() => addCartItem(singleItem)}
             >
               <img src="https://img.icons8.com/dotty/2x/add-shopping-cart.png" alt="Icon - add to cart" width="50" height="25" />
             </button>

@@ -47,6 +47,23 @@ const Routing = () => {
     // }, [])
 
     // get api + set loading - fetch from DB
+    // useEffect(() => {
+    //     const getApiAnswer = async () => {
+    //         try {
+    //             const productsUrl = 'http://localhost:8000/api/products';
+    //             const response = await axios.get(productsUrl);
+    //             console.log(response)
+    //             const data = await response.data;
+    //             setProductsData(data);
+    //             setLoading(false);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     }
+    //     getApiAnswer();
+    // }, [])
+
+    // get api + set loading - fetch from DB
     useEffect(() => {
         const getApiAnswer = async () => {
             try {
@@ -62,10 +79,6 @@ const Routing = () => {
         }
         getApiAnswer();
     }, [])
-
-    // useEffect(() => {
-    //   console.log(productsData)
-    // }, [productsData])
 
     
 
@@ -83,8 +96,7 @@ const Routing = () => {
     }
 
     const addCartItem = (product) => {
-        const productInCart = cart.findIndex((item) => item._id === product._id);
-        console.log("productInCart" + productInCart);
+        const productInCart = cart.findIndex((item) => item._id === product.id);
         if (productInCart === -1) {
             const newCartItems = { ...product, amount: 1 };
             setCart((prev) => [newCartItems, ...prev]);

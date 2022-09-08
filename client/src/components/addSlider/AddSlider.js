@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import './AddSlider.css';
-import { Slider } from '@material-ui/core';
+import Slider from '@mui/material/Slider';
 import MyContext from '../../MyContext';
 
 const AddSlider = ({ products }) => {

@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react'
-import './AdminTable.css'
-import MyContext from '../../MyContext'
-import { nanoid } from 'nanoid'
-import ReadOnlyRow from './ReadOnlyRow'
-import EditableRow from './EditableRow'
+import React, { useState, useContext } from 'react';
+import './AdminTable.css';
+import MyContext from '../../MyContext';
+import { nanoid } from 'nanoid';
+import ReadOnlyRow from './ReadOnlyRow';
+import EditableRow from './EditableRow';
+import axios from 'axios';
 
 const AdminTable = ({ loading }) => {
     const { productsData, setProductsData } = useContext(MyContext);
@@ -26,6 +27,7 @@ const AdminTable = ({ loading }) => {
     })
 
     const [editProductId, setEditProductId] = useState(null);
+
     const handleEditFormChange = (event) => {
         event.preventDefault();
 
@@ -52,16 +54,15 @@ const AdminTable = ({ loading }) => {
             // console.log("price from if " + newFormData.price);
             setError(true)
             // console.log("error " + error);
-        } 
+        }
         // console.log("error outside if " + error);
         setAddFormData(newFormData)
     }
 
-    const handleAddFormSubmit = (event) => {
+    const handleAddFormSubmit = (async (event) => {
         event.preventDefault();
 
         const newProduct = {
-            id: nanoid(),
             title: addFormData.title,
             price: addFormData.price,
             image: addFormData.image,
@@ -69,17 +70,34 @@ const AdminTable = ({ loading }) => {
             category: addFormData.category
         }
 
-        const newProducts = [newProduct, ...productsData]
         if (!error) {
-            setProductsData(newProducts);
-            // console.log("new Product ID: " + newProduct.id);
+            // const products = { title: 'React Hooks POST Request' };
+            // try {
+            console.log(newProduct);
+            axios({
+                method: 'post',
+                url: "http://localhost:8000/api/products",
+                headers: { 'content-type': 'application/json' },
+                data: newProduct
+            })
+                // .post('http://localhost:8000/api/products', { newProduct })
+                .then(res => console.log('postingNewProduct ', res.data))
+                .catch(err => console.log(err));
+            // const newProducts = [newProduct, ...productsData];
+            // setProductsData(newProducts);
+            //     console.log("new Product ID: " + newProduct._id);
+            // } catch (error) {
+            //     console.log("!error");
+            //     console.log(error.message);
+            // }
+
             handleReset();
         } else {
             alert('the price must be higher then zero');
-            handleReset();
-
+            // handleReset();
         }
-    }
+    });
+
 
     const handleReset = () => {
         Array.from(document.querySelectorAll("input")).forEach(
@@ -155,7 +173,7 @@ const AdminTable = ({ loading }) => {
                 <input
                     type="number"
                     name="price"
-                    maxLength="3"
+                    maxLength={3}
                     required="required"
                     placeholder="Enter a Price..."
                     onChange={handleAddFormChange}
@@ -201,19 +219,21 @@ const AdminTable = ({ loading }) => {
                     </thead>
                     <tbody>
                         {loading &&
-                            <section className="smooth spinner" >{ }</section>
+                            <tr><td className="smooth spinner" >{ }</td></tr>
                         }
-                        {productsData.map((product) => (
+                        {productsData.map((product, index) => (
                             <>
                                 {
                                     editProductId === product.id ?
                                         <EditableRow
+                                            key={index}
                                             editFormData={editFormData}
                                             handleEditFormChange={handleEditFormChange}
                                             handleCancelClick={handleCancelClick}
                                         />
                                         :
                                         <ReadOnlyRow
+                                            key={index}
                                             product={product}
                                             handleEditClick={handleEditClick}
                                             handleDeleteClick={handleDeleteClick}
